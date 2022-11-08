@@ -1,5 +1,3 @@
-import 'package:app_searchgifs/model/model_gifs.dart';
-
 class Gif {
   String? id;
   String? url;

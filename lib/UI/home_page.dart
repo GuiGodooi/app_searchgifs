@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
-        shape: RoundedRectangleBorder(
+        shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20),
           ),
@@ -51,6 +51,12 @@ class _HomePageState extends State<HomePage> {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white24,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                      borderRadius: BorderRadius.all(
+                        Radius.circular(12),
+                      ),
+                    ),
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
@@ -68,8 +74,8 @@ class _HomePageState extends State<HomePage> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(
+              const Padding(
+                padding: EdgeInsets.only(
                   left: 40,
                   right: 40,
                 ),
@@ -97,13 +103,19 @@ class _HomePageState extends State<HomePage> {
                     itemCount: listGif.length,
                     itemBuilder: (BuildContext context, int gif) {
                       return Padding(
-                        padding: EdgeInsets.all(12),
+                        padding: const EdgeInsets.all(12),
                         child: Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(40),
+                          ),
+                          shadowColor: Colors.grey,
                           color: Colors.black38,
-                          elevation: 20,
-                          child: Image.network(
-                            listGif[gif].images!.original!.url ?? '',
-                            fit: BoxFit.fill,
+                          elevation: 10,
+                          child: SizedBox(
+                            child: Image.network(
+                              listGif[gif].images!.original!.url ?? '',
+                              fit: BoxFit.fill,
+                            ),
                           ),
                         ),
                       );
