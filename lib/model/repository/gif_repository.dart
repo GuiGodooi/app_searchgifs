@@ -3,28 +3,22 @@ import 'package:flutter/material.dart';
 import '../gif_model.dart';
 import 'package:http/http.dart' as http;
 
-class GifReposotiry extends ChangeNotifier {
-  List<Gif> giphyList = [];
-
-  List<Gif> get allGifs => giphyList;
-
-  GifReposotiry() {
-    _setupGif();
-  }
-
-  Future _setupGif() async {
+class GifReposotiry {
+  Future<List<Gif>> getGif() async {
     Uri url = Uri.parse(
       'https://api.giphy.com/v1/gifs/trending?api_key=oGye8QvdJA8XjGTkIm96RODnzZzFhgrk&limit=25&rating=g',
     );
+    List<Gif> gifList = [];
 
-    await http.get(url).then((value) {
-      if (value.statusCode == 200) {
-        Map json = const JsonDecoder().convert(value.body);
+    final resultado = await http.get(url);
+    if (resultado.statusCode == 200) {
+      Map json = const JsonDecoder().convert(resultado.body);
 
-        for (var value in (json['data'] as List)) {
-          giphyList.add(Gif.fromJson(value));
-        }
+      for (var element in (json['data'] as List)) {
+        gifList.add(Gif.fromJson(element));
       }
-    });
+      return gifList;
+    }
+    return gifList;
   }
 }

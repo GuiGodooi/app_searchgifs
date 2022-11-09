@@ -1,4 +1,5 @@
 import 'package:app_searchgifs/model/repository/gif_repository.dart';
+import 'package:app_searchgifs/presenter/gif_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -9,7 +10,7 @@ void main() {
     MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => GifReposotiry(),
+          create: (context) => GifPresenter(GifReposotiry()),
         ),
       ],
       child: const MyApp(key: null),

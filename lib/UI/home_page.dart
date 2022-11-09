@@ -1,5 +1,5 @@
 import 'package:app_searchgifs/model/gif_model.dart';
-import 'package:app_searchgifs/model/repository/gif_repository.dart';
+import 'package:app_searchgifs/presenter/gif_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -10,15 +10,18 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  late List<Gif> gifs = [];
-  late GifReposotiry reposGif;
+class _HomePageState extends State<HomePage> with ChangeNotifier {
+  late GifPresenter presenter;
+
+  @override
+  void initState() {
+    presenter = context.read<GifPresenter>();
+    presenter.getGif();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final gif = context.watch<GifReposotiry>();
-    final listGif = gif.allGifs;
-
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
@@ -91,36 +94,42 @@ class _HomePageState extends State<HomePage> {
                     horizontal: 20,
                     vertical: 10,
                   ),
-                  child: GridView.builder(
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 10,
-                      mainAxisSpacing: 10,
-                    ),
-                    shrinkWrap: true,
-                    scrollDirection: Axis.vertical,
-                    itemCount: listGif.length,
-                    itemBuilder: (BuildContext context, int gif) {
-                      return Padding(
-                        padding: const EdgeInsets.all(12),
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(40),
-                          ),
-                          shadowColor: Colors.grey,
-                          color: Colors.black38,
-                          elevation: 10,
-                          child: SizedBox(
-                            child: Image.network(
-                              listGif[gif].images!.original!.url ?? '',
-                              fit: BoxFit.fill,
+                  child: Consumer<GifPresenter>(
+                      //p contexto e w widget;
+                      builder: (_, p, w) {
+                    return GridView.builder(
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 10,
+                        mainAxisSpacing: 10,
+                      ),
+                      shrinkWrap: true,
+                      scrollDirection: Axis.vertical,
+                      itemCount: presenter.gifs.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: EdgeInsets.all(12),
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(22),
+                            ),
+                            shadowColor: Colors.grey,
+                            color: Colors.black38,
+                            elevation: 10,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(22),
+                              child: Image.network(
+                                presenter.gifs[index].images?.original?.url ??
+                                    '',
+                                fit: BoxFit.fill,
+                              ),
                             ),
                           ),
-                        ),
-                      );
-                    },
-                  ),
+                        );
+                      },
+                    );
+                  }),
                 ),
               )
             ],
