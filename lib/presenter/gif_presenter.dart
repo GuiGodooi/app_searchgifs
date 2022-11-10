@@ -9,9 +9,12 @@ class GifPresenter with ChangeNotifier {
   GifPresenter(this.gifRepo);
 
   late List<Gif> gifs = [];
+  bool loading = true;
 
   void getGif() async {
+    loading = true;
     gifs = await gifRepo.getGif();
+    loading = false;
     notifyListeners(); //Responsavel por notificar o Grind/ListView.builder;
   }
 }
