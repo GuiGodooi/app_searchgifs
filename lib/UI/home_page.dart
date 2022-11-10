@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(22),
                                     child: Image.network(
-                                      presenter.gifs[index].images?.original
+                                      presenter.gifs[index].images?.downsized
                                               ?.url ??
                                           '',
                                       fit: BoxFit.cover,
