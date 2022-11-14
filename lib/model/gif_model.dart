@@ -25,8 +25,14 @@ class Gif {
 class Images {
   Original? original;
   Downsized? downsized;
+  FixedHeight? fixedHeightStill;
 
-  Images(this.original, this.downsized);
+  Images(
+    this.original,
+    this.downsized,
+    this.fixedHeightStill,
+  );
+
   Images.fromJson(Map<String, dynamic> json) {
     original = json['original'] != null
         ? Original.fromJson(
@@ -35,6 +41,9 @@ class Images {
         : null;
     downsized = json['downsized'] != null
         ? new Downsized.fromJson(json['downsized'])
+        : null;
+    fixedHeightStill = json['fixed_height'] != null
+        ? new FixedHeight.fromJson(json['fixed_height'])
         : null;
   }
 }
@@ -54,6 +63,23 @@ class Downsized {
   Downsized(this.url);
 
   Downsized.fromJson(Map<String, dynamic> json) {
+    url = json['url'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['url'] = this.url;
+    return data;
+  }
+}
+
+class FixedHeight {
+  String? url;
+
+  FixedHeight(this.url);
+
+  FixedHeight.fromJson(Map<String, dynamic> json) {
     url = json['url'];
   }
 

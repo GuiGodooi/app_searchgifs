@@ -1,3 +1,4 @@
+import 'package:app_searchgifs/UI/second_page.dart';
 import 'package:app_searchgifs/model/repository/gif_repository.dart';
 import 'package:app_searchgifs/presenter/gif_presenter.dart';
 import 'package:flutter/material.dart';
@@ -34,6 +35,10 @@ class _MyAppState extends State<MyApp> {
       ),
       debugShowCheckedModeBanner: false,
       home: HomePage(),
+      routes: {
+        '/home': (context) => const HomePage(),
+        '/gif-page': (context) => const SecondPage(),
+      },
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:app_searchgifs/UI/second_page.dart';
 import 'package:app_searchgifs/presenter/gif_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,7 +15,8 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
 
   @override
   void initState() {
-    context.read<GifPresenter>().getGif();
+    presenter = context.read<GifPresenter>();
+    presenter.getGif();
 
     super.initState();
   }
@@ -78,8 +80,8 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
               ),
               const Padding(
                 padding: EdgeInsets.only(
-                  left: 40,
-                  right: 40,
+                  left: 35,
+                  right: 35,
                 ),
                 child: Divider(
                   height: 10,
@@ -97,14 +99,15 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
                     //p contexto e w widget;
                     builder: (_, presenter, w) {
                       if (presenter.gifs.isEmpty) {
-                        return const Center(child: CircularProgressIndicator());
+                        return const Center(
+                            child: CircularProgressIndicator(
+                          color: Colors.amber,
+                        ));
                       }
                       return GridView.builder(
                         gridDelegate:
                             const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
                         ),
                         shrinkWrap: true,
                         scrollDirection: Axis.vertical,
@@ -116,21 +119,37 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
                               children: [
                                 Card(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(22),
+                                    borderRadius: BorderRadius.circular(14),
                                   ),
                                   shadowColor: Colors.grey,
                                   color: Colors.black38,
                                   elevation: 10,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(22),
-                                    child: Image.network(
-                                      presenter.gifs[index].images?.downsized
-                                              ?.url ??
-                                          '',
-                                      fit: BoxFit.cover,
-                                      height: 200,
-                                      width: 200,
-                                    ),
+                                  child: Column(
+                                    children: <Widget>[
+                                      Expanded(
+                                        child: GestureDetector(
+                                          onTap: () {
+                                            Navigator.of(context).pushNamed(
+                                                '/gif-page',
+                                                arguments:
+                                                    presenter.gifs[index]);
+                                          },
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(12),
+                                            child: Image.network(
+                                              presenter.gifs[index].images
+                                                      ?.downsized?.url ??
+                                                  '',
+                                              alignment: Alignment.center,
+                                              fit: BoxFit.fill,
+                                              height: 300,
+                                              width: 300,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
