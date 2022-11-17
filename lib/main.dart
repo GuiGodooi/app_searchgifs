@@ -1,10 +1,10 @@
-import 'package:app_searchgifs/UI/second_page.dart';
+import 'package:app_searchgifs/View/second_page.dart';
 import 'package:app_searchgifs/model/repository/gif_repository.dart';
 import 'package:app_searchgifs/presenter/gif_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'UI/home_page.dart';
+import 'View/home_page.dart';
 
 void main() {
   runApp(

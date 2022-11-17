@@ -1,4 +1,3 @@
-import 'package:app_searchgifs/UI/second_page.dart';
 import 'package:app_searchgifs/presenter/gif_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -43,10 +42,10 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
-              const Padding(
-                padding: EdgeInsets.all(20),
+              Padding(
+                padding: const EdgeInsets.all(20),
                 child: TextField(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 18,
                     letterSpacing: 2,
                     color: Colors.white,
@@ -55,24 +54,26 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
                   decoration: InputDecoration(
                     filled: true,
                     fillColor: Colors.white24,
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.white),
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
-                    border: OutlineInputBorder(
+                    border: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
                       ),
                     ),
-                    prefixIcon: Icon(
-                      Icons.search,
-                      size: 30,
+                    prefixIcon: IconButton(
+                      icon: const Icon(Icons.search),
                       color: Colors.amberAccent,
+                      splashColor: Colors.white10,
+                      splashRadius: 20,
+                      onPressed: () {},
                     ),
                     hintText: 'Procure aqui...',
-                    hintStyle: TextStyle(
+                    hintStyle: const TextStyle(
                       fontSize: 18,
                     ),
                   ),
@@ -141,6 +142,20 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
                                               presenter.gifs[index].images
                                                       ?.downsized?.url ??
                                                   '',
+                                              loadingBuilder: (context, child,
+                                                  loadingProgress) {
+                                                return loadingProgress == null
+                                                    ? child
+                                                    : Center(
+                                                        child:
+                                                            CircularProgressIndicator(
+                                                          backgroundColor:
+                                                              Colors.black,
+                                                          color: Colors.amber
+                                                              .withOpacity(0.5),
+                                                        ),
+                                                      );
+                                              },
                                               alignment: Alignment.center,
                                               fit: BoxFit.fill,
                                               height: 300,
