@@ -3,7 +3,6 @@ import 'package:app_searchgifs/model/repository/gif_repository.dart';
 import 'package:app_searchgifs/presenter/gif_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'View/home_page.dart';
 
 void main() {
@@ -13,6 +12,9 @@ void main() {
         ChangeNotifierProvider(
           create: (context) => GifPresenter(GifReposotiry()),
         ),
+        // ChangeNotifierProvider(
+        //   create: (context) => GifPresent(BaseClient()),
+        // ),
       ],
       child: const MyApp(key: null),
     ),

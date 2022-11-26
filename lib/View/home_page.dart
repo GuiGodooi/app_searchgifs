@@ -2,6 +2,8 @@ import 'package:app_searchgifs/presenter/gif_presenter.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../presenter/presnt.dart';
+
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -11,11 +13,15 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> with ChangeNotifier {
   late GifPresenter presenter;
+  //late GifPresent present;
 
   @override
   void initState() {
     presenter = context.read<GifPresenter>();
     presenter.getGif();
+
+    // present = context.read<GifPresent>();
+    // present.getListAPI();
 
     super.initState();
   }
@@ -25,6 +31,7 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
     return Scaffold(
       backgroundColor: Colors.grey[900],
       appBar: AppBar(
+        //Personalizando borda para appbar;
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
             bottom: Radius.circular(20),
@@ -139,8 +146,8 @@ class _HomePageState extends State<HomePage> with ChangeNotifier {
                                             borderRadius:
                                                 BorderRadius.circular(12),
                                             child: Image.network(
-                                              presenter.gifs[index].images
-                                                      ?.downsized?.url ??
+                                              presenter.gifs[index].images!
+                                                      .downsized!.url ??
                                                   '',
                                               loadingBuilder: (context, child,
                                                   loadingProgress) {
