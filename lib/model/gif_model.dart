@@ -4,6 +4,7 @@ class Gif {
   String? bitlyGifUrl;
   String? title;
   Images? images;
+  User? user;
 
   Gif(
     this.id,
@@ -11,6 +12,7 @@ class Gif {
     this.bitlyGifUrl,
     this.title,
     this.images,
+    this.user,
   );
 
   Gif.fromJson(Map<String, dynamic> json) {
@@ -19,6 +21,7 @@ class Gif {
     bitlyGifUrl = json['bitlyGifUrl'];
     title = json['title'];
     images = json['images'] != null ? Images.fromJson(json['images']) : null;
+    user = json['user'] != null ? User.fromJson(json['user']) : null;
   }
 }
 
@@ -87,6 +90,22 @@ class FixedHeight {
     final Map<String, dynamic> data = new Map<String, dynamic>();
 
     data['url'] = this.url;
+    return data;
+  }
+}
+
+class User {
+  String? display_name;
+
+  User(this.display_name);
+  User.fromJson(Map<String, dynamic> json) {
+    display_name = json['display_name'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+
+    data['display_name'] = this.display_name;
     return data;
   }
 }
