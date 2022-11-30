@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http;
 class GifReposotiry {
   Future<List<Gif>> getGif() async {
     Uri url = Uri.parse(
-      'https://api.giphy.com/v1/gifs/trending?api_key=oGye8QvdJA8XjGTkIm96RODnzZzFhgrk&limit=25&rating=g',
+      'https://api.giphy.com/v1/gifs/trending?api_key=jhqvxq3weCvnyk5JRBM3HOPLJrF2P6Yp&limit=25&rating=g',
     );
 
     List<Gif> gifList = [];

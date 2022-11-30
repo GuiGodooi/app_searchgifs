@@ -1,19 +1,18 @@
-// import 'package:app_searchgifs/model/repository/base_client.dart';
-// import 'package:flutter/material.dart';
+import 'package:app_searchgifs/model/repository/base_client.dart';
+import 'package:flutter/material.dart';
 
-// import '../model/gif_model.dart';
+import '../model/gif_model.dart';
 
-// class GifPresent extends ChangeNotifier {
-//   final BaseClient baseClient;
+class GifPresent extends ChangeNotifier {
+  final BaseClient baseClient;
 
-//   GifPresent(this.baseClient);
+  GifPresent(this.baseClient);
 
-//   late List<Gif> gif = [];
-//   bool loading = true;
+  late List<Gif> gif = [];
+  bool loading = true;
 
-//   void getListAPI() async {
-//     gif = await baseClient.getApi();
-//     loading = false;
-//     notifyListeners();
-//   }
-// }
+  void getListAPI() async {
+    loading = false;
+    notifyListeners();
+  }
+}
