@@ -1,3 +1,5 @@
+//criando model Gif
+//classe que estancia minhas principais informações
 class Gif {
   String? id;
   String? url;
@@ -25,6 +27,7 @@ class Gif {
   }
 }
 
+//classe que tras a url dos gifs e seu tamanho
 class Images {
   Original? original;
   Downsized? downsized;
@@ -94,6 +97,7 @@ class FixedHeight {
   }
 }
 
+//Trazendo nome do gif
 class User {
   String? display_name;
 
