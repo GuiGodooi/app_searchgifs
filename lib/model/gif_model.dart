@@ -1,3 +1,5 @@
+//criando model Gif;
+//classe que estancia minhas principais informações;
 class Gif {
   String? id;
   String? url;

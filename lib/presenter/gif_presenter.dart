@@ -1,6 +1,5 @@
 import 'package:app_searchgifs/model/repository/gif_repository.dart';
 import 'package:flutter/cupertino.dart';
-
 import '../model/gif_model.dart';
 
 class GifPresenter with ChangeNotifier {
